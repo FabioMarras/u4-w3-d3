@@ -2,6 +2,7 @@ package fabiomarras.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +17,11 @@ public class Person {
     private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
     private Genres genres;
+
+    @ManyToMany
+    @JoinTable(name = "person_partecipazione", joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "partecipazione_id"))
+    private Set<Partecipazione> partecipazione;
 
     public Person(){}
 
@@ -69,6 +75,14 @@ public class Person {
 
     public void setGenres(Genres genres) {
         this.genres = genres;
+    }
+
+    public Set<Partecipazione> getPartecipazione() {
+        return partecipazione;
+    }
+
+    public void setPartecipazione(Set<Partecipazione> partecipazione) {
+        this.partecipazione = partecipazione;
     }
 
     @Override

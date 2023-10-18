@@ -20,13 +20,13 @@ public class PartecipazioneDAO {
     }
 
     //METODO FIND per id
-    public PartecipazioneDAO findById(UUID id){
-        return em.find(PartecipazioneDAO.class, id);
+    public Partecipazione findById(UUID id){
+        return em.find(Partecipazione.class, id);
     }
 
     //METODO DELETE per eliminare tramite id
     public void findByIdAndDelete(UUID id){
-        PartecipazioneDAO found = em.find(PartecipazioneDAO.class, id);
+        Partecipazione found = em.find(Partecipazione.class, id);
         if (found != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();

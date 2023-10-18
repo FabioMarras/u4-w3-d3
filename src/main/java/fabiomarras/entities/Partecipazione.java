@@ -1,6 +1,7 @@
 package fabiomarras.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -12,6 +13,15 @@ public class Partecipazione {
     @Enumerated(EnumType.STRING)
     private Status Status;
 
+    @ManyToMany
+    @JoinTable(name = "person_partecipazione", joinColumns = @JoinColumn(name = "partecipazione_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
+    private Set<Person> person;
+    @ManyToMany
+    @JoinTable(name = "partecipazione_event", joinColumns = @JoinColumn(name = "partecipazione_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private Set<Evento> event;
+
     public Partecipazione(){}
 
     public Partecipazione(fabiomarras.entities.Status status) {
@@ -22,7 +32,6 @@ public class Partecipazione {
         return id;
     }
 
-
     public fabiomarras.entities.Status getStatus() {
         return Status;
     }
@@ -31,11 +40,20 @@ public class Partecipazione {
         Status = status;
     }
 
+    public Set<Person> getPerson() {
+        return person;
+    }
+
+    public void setPerson(Set<Person> person) {
+        this.person = person;
+    }
+
+
     @Override
     public String toString() {
         return "Partecipazione{" +
-                "id=" + id +
-                ", Status=" + Status +
+                "Status=" + Status +
+                ", person=" + person +
                 '}';
     }
 }

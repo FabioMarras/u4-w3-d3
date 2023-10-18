@@ -20,13 +20,13 @@ public class LocationDAO {
     }
 
     //METODO FIND per id
-    public LocationDAO findById(UUID id){
-        return em.find(LocationDAO.class, id);
+    public Location findById(UUID id){
+        return em.find(Location.class, id);
     }
 
     //METODO DELETE per eliminare tramite id
     public void findByIdAndDelete(UUID id){
-        LocationDAO found = em.find(LocationDAO.class, id);
+        Location found = em.find(Location.class, id);
         if (found != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();

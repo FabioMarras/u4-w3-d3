@@ -1,6 +1,7 @@
 package fabiomarras.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +14,11 @@ public class Location {
     private String city;
 
     public Location(){}
+
+    @ManyToMany
+    @JoinTable(name = "event_location", joinColumns = @JoinColumn(name = "location_id"),
+    inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<Evento> events;
 
     public Location(String name, String city) {
         this.name = name;
@@ -37,6 +43,14 @@ public class Location {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<Evento> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Evento> events) {
+        this.events = events;
     }
 
     @Override
